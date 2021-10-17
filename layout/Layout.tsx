@@ -8,12 +8,12 @@ import { Header } from './Header/Header';
 import styles from './Layout.module.css';
 
 const Layout = ({ children }: LayoutProps): ReactElement => (
-  <>
-    <Header>Header</Header>
-    <Sidebar />
-    <main>{children}</main>
-    <Footer>Footer</Footer>
-  </>
+  <div className={styles.wrapper}>
+    <Header className={styles.header}>Header</Header>
+    <Sidebar className={styles.sidebar} />
+    <main className={styles.main}>{children}</main>
+    <Footer className={styles.footer}>Footer</Footer>
+  </div>
 );
 
 export const withLayout = <T extends Record<string, unknown>>(Component: FC<T>) => function withLayoutWrapper(props: T): ReactElement {
