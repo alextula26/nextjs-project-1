@@ -1,11 +1,17 @@
+/* eslint-disable no-underscore-dangle */
+import { GetStaticProps } from 'next';
 import { ReactElement, useState } from 'react';
+import axios from 'axios';
+
+import { MenuItem } from '../interfaces/menu';
+
 import {
   Button, Heading, Paragraph, Rating, Tag,
 } from '../components';
 
 import { withLayout } from '../layout/Layout';
 
-function Home(): ReactElement {
+function Home({ menu, firstCategory }: HomeProps): ReactElement {
   const [rating, setRating] = useState<number>(4);
 
   return (
@@ -39,8 +45,35 @@ function Home(): ReactElement {
       <hr />
 
       <Rating rating={rating} isEditable setRating={setRating} />
+
+      <hr />
+
+      <ul>
+        {menu.map((item) => <li key={item._id.secondCategory}>{item._id.secondCategory}</li>)}
+      </ul>
     </div>
   );
 }
 
 export default withLayout(Home);
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const firstCategory = 0;
+  const response = await axios.post<MenuItem[]>(`${process.env.NEXT_PUBLIC_DOMAIN}/api/top-page/find`, {
+    firstCategory,
+  });
+
+  const menu = response.data;
+
+  return {
+    props: {
+      menu,
+      firstCategory,
+    },
+  };
+};
+
+interface HomeProps extends Record<string, unknown> {
+  menu: MenuItem[]
+  firstCategory: number
+}
