@@ -15,18 +15,17 @@ import { ProductModel } from '../../interfaces/product';
 import { firstLevelMenu } from '../../helpers/helpers';
 
 import { withLayout } from '../../layout/Layout';
+import { TopPageComponent } from '../../page-components';
 
-function Course({
+function TopPage({
   menu, page, firstCategory, products,
-}: CourseProps): ReactElement {
+}: TopPageProps): ReactElement {
   return (
-    <>
-      {products && products.length}
-    </>
+    <TopPageComponent page={page} products={products} firstCategory={firstCategory} />
   );
 }
 
-export default withLayout(Course);
+export default withLayout(TopPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let paths: string[] = [];
@@ -42,7 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<CourseProps> = async ({ params }: GetStaticPropsContext<ParsedUrlQuery>) => {
+export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: GetStaticPropsContext<ParsedUrlQuery>) => {
   if (!params) {
     return {
       notFound: true,
@@ -84,7 +83,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({ params }: Ge
   }
 };
 
-interface CourseProps extends Record<string, unknown> {
+interface TopPageProps extends Record<string, unknown> {
   menu: MenuItem[];
   firstCategory: TopLevelCategory;
   page: TopPageModel;
