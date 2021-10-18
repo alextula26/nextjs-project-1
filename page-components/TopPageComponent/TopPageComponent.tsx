@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable no-underscore-dangle */
 import { ReactElement } from 'react';
 import { TopPageComponentProps } from './TopPageComponent.props';
@@ -37,7 +38,7 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
       </>
     )}
 
-    {page.seoText && <Paragraph>{page.seoText}</Paragraph>}
+    {page.seoText && <div className={styles.seo} dangerouslySetInnerHTML={{ __html: page.seoText }} />}
 
     <Heading tag="h2">Получаемые навыки</Heading>
     {page.tags && page.tags.map((tag) => <Tag key={tag} size="s">{tag}</Tag>)}
