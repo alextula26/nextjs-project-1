@@ -62,7 +62,7 @@
   justify-content: center;
 }
 
-.field circle {
+.filled circle {
   fill: var(--red);
 }
 
