@@ -4,7 +4,7 @@ import { TopPageComponentProps } from './TopPageComponent.props';
 
 import styles from './TopPageComponent.module.css';
 import {
-  Heading, HhData, Tag,
+  Heading, HhData, Tag, Advantages, Paragraph,
 } from '../../components';
 import { TopLevelCategory } from '../../interfaces/page';
 
@@ -29,6 +29,17 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
       <Tag variant="red" size="m">hh.ru</Tag>
     </div>
 
-    {firstCategory === TopLevelCategory.Courses && <HhData {...page.hh} />}
+    {firstCategory === TopLevelCategory.Courses && page.hh && <HhData {...page.hh} />}
+    {page.advantages && page.advantages.length > 0 && (
+      <>
+        <Heading tag="h2">Преимущества</Heading>
+        <Advantages advantages={page.advantages} />
+      </>
+    )}
+
+    {page.seoText && <Paragraph>{page.seoText}</Paragraph>}
+
+    <Heading tag="h2">Получаемые навыки</Heading>
+    {page.tags && page.tags.map((tag) => <Tag key={tag} size="s">{tag}</Tag>)}
   </div>
 );
