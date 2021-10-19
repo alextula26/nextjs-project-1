@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable no-underscore-dangle */
-import { ReactElement, useReducer } from 'react';
+import { ReactElement, useEffect, useReducer } from 'react';
 import { TopPageComponentProps } from './TopPageComponent.props';
 
 import { sortReducer } from '../../reducers/sort';
@@ -10,7 +10,7 @@ import { SortEnum } from '../../components/Sort/Sort.props';
 import { TopLevelCategory } from '../../interfaces/page';
 
 import {
-  Heading, HhData, Tag, Advantages, Sort,
+  Heading, HhData, Tag, Advantages, Sort, Product,
 } from '../../components';
 
 import styles from './TopPageComponent.module.css';
@@ -22,6 +22,11 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
     dispatch({ type: sort });
   };
 
+  useEffect(() => {
+    dispatch({ type: 'AddProduct', products });
+  }, [products]);
+
+  console.log('products', products);
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
@@ -31,7 +36,7 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
       </div>
 
       <div>
-        {state.products && state.products.length && state.products.map((product) => <div key={product._id}>{product.title}</div>)}
+        {state.products && state.products.length && state.products.map((product) => <Product key={product._id} product={product} />)}
       </div>
 
       <div className={styles.hhTitle}>

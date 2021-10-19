@@ -17,6 +17,7 @@ body {
   padding: 0;
 
   color: var(--black);
+  background: #F5F6F8;
 
   font-family: var(--font-family);
 }
