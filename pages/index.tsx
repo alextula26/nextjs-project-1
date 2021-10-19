@@ -1,12 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import { GetStaticProps } from 'next';
-import { ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import axios from 'axios';
 
 import { MenuItem } from '../interfaces/menu';
 
 import {
-  Button, Heading, Paragraph, Rating, Tag,
+  Button, Heading, Input, Paragraph, Rating, Search, Tag, Textarea,
 } from '../components';
 
 import { withLayout } from '../layout/Layout';
@@ -51,6 +51,12 @@ function Home({ menu, firstCategory }: HomeProps): ReactElement {
       <ul>
         {menu.map((item) => <li key={item._id.secondCategory}>{item._id.secondCategory}</li>)}
       </ul>
+
+      <hr />
+
+      <Input placeholder="Name" />
+      <Textarea placeholder="Name" />
+
     </div>
   );
 }

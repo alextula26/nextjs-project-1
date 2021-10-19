@@ -6,11 +6,12 @@ import styles from './Sidebar.module.css';
 import { Menu } from '../Menu/Menu';
 
 import Logo from '../logo.svg';
+import { Search } from '../../components';
 
 export const Sidebar = ({ className, ...props }: SidebarProps): ReactElement => (
   <div className={cn(className, styles.sidebar)} {...props}>
     <Logo className={styles.logo} />
-    <div>поиск</div>
+    <Search />
     <Menu />
   </div>
 );
