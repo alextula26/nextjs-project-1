@@ -12,7 +12,6 @@ export interface SortReducerState {
 }
 
 export const sortReducer = (state: SortReducerState, action: ActionType): SortReducerState => {
-  console.log('action', action);
   switch (action.type) {
     case SortEnum.Rating:
       return {

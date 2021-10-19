@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
+import Image from 'next/image';
+import cn from 'classnames';
 import { ProductProps } from './Product.props';
-
 import { Rating } from '../Rating/Rating';
 import {
   Button, Card, Divider, Tag,
@@ -12,7 +13,14 @@ import styles from './Product.module.css';
 
 export const Product = ({ product }: ProductProps): ReactElement => (
   <Card className={styles.product}>
-    <div className={styles.logo}><img src={process.env.NEXT_PUBLIC_DOMAIN + product.image} alt={product.title} /></div>
+    <div className={styles.logo}>
+      <Image
+        src={process.env.NEXT_PUBLIC_DOMAIN + product.image}
+        alt={product.title}
+        width={70}
+        height={70}
+      />
+    </div>
     <div className={styles.title}>{product.title}</div>
     <div className={styles.price}>
       {priceRu(product.price)}
@@ -57,7 +65,7 @@ export const Product = ({ product }: ProductProps): ReactElement => (
       </div>
       )}
     </div>
-    <Divider className={styles.hr} />
+    <Divider className={cn(styles.hr, styles.hr2)} />
     <div className={styles.actions}>
       <Button variant="primary">Узнать подробнее</Button>
       <Button variant="ghost" arrow="right" className={styles.reviewButton}>Читать отзывы</Button>
